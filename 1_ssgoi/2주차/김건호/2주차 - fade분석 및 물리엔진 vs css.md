@@ -78,7 +78,8 @@ export const fade = (options: FadeOptions = {}): SggoiTransition => {
 
 **개선 되면 좋을 것 같은 점**
 
--   outAnimationComplete, resolveOutAnimation 이 두개가 fade() 함수 내부의 공유 상태인데, 여러 요소가 동시에 fade 트랜지션을 쓸 경우 **충돌**위험 ( 동시 호출 시 덮어쓸 위험)
+-   outAnimationComplete, resolveOutAnimation 이 두개가 fade() 함수 내부의 공유 상태인데, 여러 요소가 동시에 fade 트랜지션을 쓸 경우 **충돌**위험 ( 동시 호출 시 덮어쓸 위험) - 이렇게 쓸일이 잘없긴함..
+  > const sharedFade = fade() 이렇게 변수에 할당해서 사용 시 하나의 클로저 상태를 공유하기에 -> 서로 동시에 다른 요소에서 실행 시 Promise가 덮어 씌워버려서 마지막 out만 유효
 -   WeakMap 이용하면 좋을 듯 (요소별 개별 상태 저장)
 
 **WeakMap이란 ?**
