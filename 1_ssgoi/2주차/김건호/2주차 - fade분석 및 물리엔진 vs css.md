@@ -129,7 +129,7 @@ export const fade = (options: FadeOptions = {}): SggoiTransition => {
 CSS cubic/keyframes → “미리 정의된 경로대로 움직임” (타임라인 기반).  
 Spring physics → “실시간 물리 시뮬레이션” (상호작용 기반).
 
-**CSS cubic-bezier / keyframes**
+**CSS cubic-bezier**
 
 - cubic-bezier : cubic-bezier(x1,y1,x2,y2)
 - x1, x2는 "시간의 진행"을, y1, y2는 "애니메이션 값의 변화"를 의미합니다.
@@ -142,7 +142,7 @@ Spring physics → “실시간 물리 시뮬레이션” (상호작용 기반).
 
 .fade {
     animation: fadeInOut 1s cubic-bezier(0.68, -0.55, 0.27, 1.55); // x1, y1, x2, y2
-}
+} 
 
 @keyframes fadeInOut {
     from {
@@ -160,6 +160,13 @@ linear: cubic-bezier(0.0, 0.0, 1.0, 1.0)
 ease-in: cubic-bezier(0.42, 0, 1.0, 1.0)
 ease-out: cubic-bezier(0.0, 0.0, 0.58, 1.0)
 ease-in-out: cubic-bezier(0.42, 0, 0.58, 1.0)
+```
+
+```html
+cubic-bezier를 tailwind-css에서 쓸 시 
+<div className="transition-all duration-150 ease-[cubic-bezier(0,0.53,1.2,1.2)]">
+    <span className="font-bold text-green">아령하세요</span>
+</div>
 ```
 
 -   베지어 곡선(bezier curves) - 부드러운 곡선을 모델링하기 위해 컴퓨터 그래픽에서 널리 사용되는 기술
