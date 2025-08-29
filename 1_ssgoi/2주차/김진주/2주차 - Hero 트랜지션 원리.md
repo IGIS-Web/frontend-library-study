@@ -8,22 +8,26 @@ SSGOI 라이브러리에서는 `data-hero-key` 속성을 활용해 Hero 트랜�
 ## 코드 예시
 1. 리스트 페이지 (Home.tsx)
 ```
-<div className={styles.colorGrid}>
-  {colors.map((item) => (
-    <Link
-      key={item.id}
-      href={`/item/${item.id}`}
-      className={styles.colorBox}
-      style={{ backgroundColor: item.color }}
-      data-hero-key={`color-${item.id}`} // Hero 트랜지션 연결용 key
-    >
-      <span className={styles.colorName}>{item.name}</span>
-    </Link>
-  ))}
-</div>
+{/* Hero Transition Section */}
+        <div className={styles.heroTransitionSection}>
+          <h2 className={styles.sectionTitle}>Hero Transition</h2>
+          <div className={styles.colorGrid}>
+            {colors.map((item) => (
+              <Link
+                key={item.id}
+                href={`/item/${item.id}`}
+                className={styles.colorBox}
+                style={{ backgroundColor: item.color }}
+                data-hero-key={`color-${item.id}`}
+              >
+                <span className={styles.colorName}>{item.name}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
 ```
 
-2. 상세 페이지 (예시: /item/[id]/page.tsx)
+2. 상세 페이지 (/item/[id]/page.tsx)
 ```
 "use client";
 import { useParams } from "next/navigation";
@@ -38,26 +42,38 @@ const colorMap = {
   6: { color: "#DDA0DD", name: "Plum" },
 };
 
-export default function ItemDetail() {
-  const params = useParams();
-  const item = colorMap[params.id as keyof typeof colorMap];
+export default async function ItemDetailPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const resolved = await params;
+  const id = Number(resolved.id);
+  const item = colors.find((c) => c.id === id);
+
+  if (!item) {
+    return <div>Item not found</div>;
+  }
 
   return (
-    <div className={styles.detailContainer}>
+    <SsgoiTransition id={`/item/${id}`}>
       <div
-        className={styles.detailColorBox}
+        className={styles.detailContainer}
         style={{ backgroundColor: item.color }}
-        data-hero-key={`color-${params.id}`} // 리스트와 동일한 key
+        data-hero-key={`color-${item.id}`}
       >
-        <span className={styles.detailColorName}>{item.name}</span>
-      </div>
-      <p>상세 페이지 내용...</p>
-    </div>
-  );
-}
+        <Link href="/" className={styles.backButton}>
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              fillRule="evenodd"
+              d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+              clipRule="evenodd"
+            />
+          </svg>
+          Back
+        </Link>
 ```
-이렇게 두 페이지 모두 같은 data-hero-key를 사용하면, SSGOI가 Hero 트랜지션을 자동으로 적용합니다.
-색상 박스를 클릭하면 리스트에서 상세 페이지로 박스가 부드럽게 이동하는 애니메이션이 실행됩니다.
+
 ---
 
 ## 주요 포인트
@@ -70,49 +86,32 @@ export default function ItemDetail() {
 
 ## 동작 원리
 
-### Hero Key 매칭
-- 두 페이지(리스트/상세) 모두 같은 `data-hero-key`를 가진 요소가 있으면, SSGOI가 이 두 요소를 연결합니다.
+SsgoiTransition 컴포넌트는 Hero Transition 애니메이션의 컨트롤러 역할을 합니다.
 
-### 페이지 이동 시
-- 사용자가 색상 박스를 클릭하면 Next.js 라우터가 `/item/1` 등으로 이동합니다.
-- SSGOI는 이전 페이지와 새 페이지의 `data-hero-key`가 같은 요소를 찾아 위치, 크기, 스타일을 계산합니다.
+주요 역할
+1. Hero 요소 추적
 
-### 애니메이션 실행
-- SSGOI가 두 요소의 위치/크기 차이를 계산해, 자연스럽게 이동하는 애니메이션을 자동으로 적용합니다.
-- spring 파라미터(`stiffness`, `damping` 등)는 `layout.tsx`의 `Ssgoi` 설정에서 조절할 수 있습니다.
-```
-const ssgoiConfig: SsgoiConfig = {
-  transitions: [
-    // Use hero transition between main and item detail pages
-    {
-      from: "/",
-      to: "/item/*",
-      transition: hero({ spring: { stiffness: 5, damping: 1 } }),
-      symmetric: true,
-    },
-  ],
-};
+내부적으로 data-hero-key 속성이 있는 DOM 요소를 감지합니다.
+페이지 전환 전후로 같은 data-hero-key를 가진 요소를 찾아냅니다.
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body>
-        <Ssgoi config={ssgoiConfig}>
-          <div
-            style={{ position: "relative", minHeight: "100vh", width: "100%" }}
-          >
-            {children}
-          </div>
-        </Ssgoi>
-      </body>
-    </html>
-  );
-}
-```
+2. 애니메이션 관리
+
+페이지가 바뀔 때, 이전 페이지의 Hero 요소와 새 페이지의 Hero 요소 위치/크기를 계산합니다.
+두 요소 사이를 자연스럽게 애니메이션(이동, 크기 변화 등)으로 연결합니다.
+
+3. 상태 관리
+
+페이지 전환 시점에 애니메이션을 시작하고, 완료되면 새 페이지를 정상적으로 보여줍니다.
+
+4. id prop
+
+id prop은 페이지별로 고유하게 Hero Transition을 구분하는 데 사용됩니다.
+``
+<SsgoiTransition id={/item/${id}}>...</SsgoiTransition>
+``
+
+=> SsgoiTransition은 Hero 애니메이션의 시작/종료, 대상 요소 추적, 애니메이션 실행을 담당합니다.
+Hero 요소(data-hero-key)를 감지하고, 페이지 전환 시 애니메이션을 적용합니다.
 
 ---
 
