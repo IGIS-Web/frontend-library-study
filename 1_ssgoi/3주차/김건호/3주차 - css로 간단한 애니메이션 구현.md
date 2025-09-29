@@ -107,3 +107,30 @@ const Fade = ({ children, visible }: { children: React.ReactNode, visible: boole
 - onTransitionEnd는 CSS 트랜지션(transition)이 끝났을 때 자동으로 호출되는 React 이벤트 핸들러입니다.   
 - 예를 들어, opacity나 transform 등 CSS 속성에 트랜지션이 적용되어 있고, 해당 속성이 변경되어 애니메이션이 끝나면 이 핸들러가 실행됩니다.  
 - 용도: 트랜지션이 끝난 뒤에 상태를 변경하거나, DOM을 정리할 때 사용합니다.
+
+**자매품 onAnimationEnd**
+- @keyframes 기반 animation이 끝났을 때 발생
+- CSS 애니메이션 자체가 완료될 때
+- 한 번 정의한 애니메이션(@keyframes)을 실행 → 완료되면 딱 한 번 발생 / 반복(infinite)이면 반복마다 이벤트 발생
+
+```css
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+.box {
+  animation: fadeOut 0.5s forwards;
+}
+```
+
+```react
+<div
+  className="box"
+  onAnimationEnd={() => console.log("animation 끝!")}
+/>
+
+```
+
+- 단순 show/hide 같은 경우엔 transition + transitionend가 더 간단하고 자연스러움.
+- 복잡한 연속 동작이나 프로그래밍된 애니메이션은 animation + animationend가 더 적합.
