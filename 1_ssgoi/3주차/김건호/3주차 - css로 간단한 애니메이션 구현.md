@@ -134,3 +134,9 @@ const Fade = ({ children, visible }: { children: React.ReactNode, visible: boole
 
 - 단순 show/hide 같은 경우엔 transition + transitionend가 더 간단하고 자연스러움.
 - 복잡한 연속 동작이나 프로그래밍된 애니메이션은 animation + animationend가 더 적합.
+
+** 예시2 **
+
+<img width="1194" height="927" alt="image" src="https://github.com/user-attachments/assets/7c8b88c2-d8dc-4d40-8731-e0906568bbc4" />
+![20251001-0257-36 6863974](https://github.com/user-attachments/assets/12ecea8a-1828-453c-a821-5d064b49da29)
+
