@@ -135,8 +135,23 @@ const Fade = ({ children, visible }: { children: React.ReactNode, visible: boole
 - 단순 show/hide 같은 경우엔 transition + transitionend가 더 간단하고 자연스러움.
 - 복잡한 연속 동작이나 프로그래밍된 애니메이션은 animation + animationend가 더 적합.
 
+---
+
 ** 예시2 **
 
 <img width="1194" height="927" alt="image" src="https://github.com/user-attachments/assets/7c8b88c2-d8dc-4d40-8731-e0906568bbc4" />
-![20251001-0257-36 6863974](https://github.com/user-attachments/assets/12ecea8a-1828-453c-a821-5d064b49da29)
+예시 GIF ![20251001-0257-36 6863974](https://github.com/user-attachments/assets/12ecea8a-1828-453c-a821-5d064b49da29)   
 
+---
+
+** onTransition 추가 사항 **
+``` ts
+  onTransitionStart={() => console.log("START")}
+  onTransitionRun={() => console.log("RUN")}
+  onTransitionCancel={() => console.log("CANCEL")}
+  onTransitionEnd={() => console.log("END")}
+```
+
+- 실제 실행 시
+<img width="143" height="145" alt="image" src="https://github.com/user-attachments/assets/f9e6a3b4-8ea5-4f15-9b56-a594c236ba57" />
+- 마우스 오버 시 transition 애니메이션, 마우스 올렸다가 바로 땐 상황 ( css에 2s 설정 )
