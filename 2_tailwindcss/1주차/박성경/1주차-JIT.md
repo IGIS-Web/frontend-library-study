@@ -19,7 +19,7 @@
 - 코드 안에서 "bg-red-500" 같은 문자열 리터럴이 발견되면 그 CSS만 생성해서 인메모리 캐시에 추가
 
 ## 3. 문제가 되었던 상황
-```ts
+```html
 <div className={${!sidebarWidth ? "left-[10px]" : `left-[${sidebarWidth + 10}px]`} />
 ```
 sidebarWidth가 50일때, 브라우저 개발자도구에서 className을 확인했을 땐 "left-[60px]",
@@ -29,22 +29,22 @@ sidebarWidth가 50일때, 브라우저 개발자도구에서 className을 확인
 - JIT는 **빌드 타임**에 텍스트만을 읽어서 정규식으로 문자열을 찾음
 - 하지만 sidebarWidth는 **런타임(실행) 시점**에야 계산되는 값
 - 빌드 시점에도 코드에 존재하는 **정적 문자열**이 아니면 CSS를 만들 수 없음
-```ts
+```html
 <!-- 같은 이유로 문자열 연결도 올바른 감지 불가능 -->
 <div className={`mt-[${size === 'lg' ? '22px' : '17px' }]`}></div>
 ```
-```ts
+```html
 <!-- 수정된 코드 -->
 <div className={ size === 'lg' ? 'mt-[22px]' : 'mt-[17px]' }></div>
 ```
 
 ### 3.2 해결 방법
 **공식 문서**: 이러한 상황에서는 **인라인 스타일**을 사용하거나, 프로젝트에 적합하다면 Tailwind를 Emotion과 같은 **CSS-in-JS 라이브러리**와 함께 사용하세요.
-```ts
+```html
 <!-- style 태그 사용하기 -->
 <div style={{ left: `${sidebarWidth + 10}px` }} />
 ```
-```ts
+```html
 <!-- CSS 변수 사용하기 -->
 <div
   className="left-[var(--sidebar-offset)]"
