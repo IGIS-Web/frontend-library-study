@@ -34,7 +34,7 @@
 
 
 ```ts
-function ColorChanger() {
+const ColorChanger = () => {
   const handleChangeColor = () => {
     // document.documentElement는 <html> 태그
     document.documentElement.style.setProperty('--color-primary', '#e11d48');  
