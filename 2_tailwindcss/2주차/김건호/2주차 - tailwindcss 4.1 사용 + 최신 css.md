@@ -85,13 +85,12 @@ export const ListItems = () => {
     const groupState = selectedMenuItem ? "open" : "closed";
 
     return (
-        // groupState의 값이 open이 되면 하위 자식들 모두 group-data-[state=open]:bg-[rgba(0,0,0,0.99)]
         // group class지정을 했기때문에 ul에 hover 시 자식 들 전부 group-hover:bg-[rgba(0,0,0,0.1)]
         <ul data-state={groupState} className="group flex items-start flex-col gap-6 w-full">
             {ITEM_LIST.map((item) => (
                 <li
                     key={item.id}
-                    className={`group-data-[state=open]:bg-[rgba(0,0,0,0.99)] group-hover:bg-[rgba(0,0,0,0.1)] ${selectedItemStyle(
+                    className={`group-hover:bg-[rgba(0,0,0,0.1)] px-2 ${selectedItemStyle(
                         item.text
                     )} cursor-pointer transition-all`}
                     onClick={() => handleClick(item.text)}
@@ -99,20 +98,28 @@ export const ListItems = () => {
                     {item.text}
                 </li>
             ))}
+
+            // 부모의 data-state 가 open이 되면 아래 2 요소는 개별적 style 적용
+            <div className="group-data-[state=open]:bg-red-700 group-data-[state=open]:bg-opacity-10 w-full h-[30px] bg-black text-white flex items-center justify-center">group-data-[state]</div>
+            <div className="group-data-[state=open]:bg-primary group-data-[state=open]:bg-opacity-10 w-full h-[30px] bg-black text-white flex items-center justify-center">group-data-[state]</div>
         </ul>
     );
 };
 
 ```
+**group**   
+![20251107-0002-46 0618344](https://github.com/user-attachments/assets/4918337a-9c99-43a6-9f0b-c863fb6809dd)   
+**group-data-[state]**      
+![20251107-0021-20 8080532](https://github.com/user-attachments/assets/7c8e1479-aa91-40ad-b648-06e54d0eed40)
 
 ## 4. @property이용해서 ProgressBar 구현
 
 
 ```css
-@property --progress {
-  syntax: '<number>';
-  inherits: false;
-  initial-value: 0;
+@property --progress { // 사용자 속성 이름
+  syntax: '<number>'; // 숫자 타입만 허용
+  inherits: false; // 부모 요소로부터 상속 X (ex: 부모에서 --progress 사용 시 자식 요소에서 그대로 상속)
+  initial-value: 0; // 기본 값
 }
 ```
 
