@@ -1,0 +1,12 @@
+{
+  "name": "mini-jit-watch",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node bin/cli.js"
+  },
+  "dependencies": {
+    "chokidar": "^3.5.3",
+    "fast-glob": "^3.2.12"
+  }
+}
