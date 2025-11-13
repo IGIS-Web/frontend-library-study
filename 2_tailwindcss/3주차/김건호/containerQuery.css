@@ -1,0 +1,32 @@
+.container_query {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    border: 2px solid #09f;
+    container-type: inline-size;
+    container-name: test;
+}
+
+.container_query>div {
+    flex: 1 1 0;
+    background: #eee;
+    padding: 2rem;
+    text-align: center;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+/* 컨테이너의 가로 크기가 600px 이상일 때 스타일 변경 */
+@container (max-width: 600px) {
+    .container_query>div {
+        background: #ffd700;
+        color: #222;
+    }
+}
+
+@container test (min-width: 601px) {
+    .container_query>div {
+        background: #32cd32;
+        color: #fff;
+    }
+}

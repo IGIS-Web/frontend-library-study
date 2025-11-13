@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <section class="container">
+        <h1 id="__h1" class="_h1">h1</h1>
+        <h2>h2</h2>
+        <h3>h3</h3>
+        <h4>h4</h4>
+
+        <div class="card">
+            <p>카드입니당</p>
+            <button class="btn">버튼짱</button>
+            <button class="btn">버튼짱</button>
+            <button class="btn">버튼짱</button>
+        </div>
+
+        <div class="container_query">
+            <div>box1</div>
+            <div>box2</div>
+            <div>box3</div>
+        </div>
+    </section>
+
+    <script>
+        const btn = document.querySelector('.btn');
+        btn.addEventListener('click', () => {
+            btn.classList.toggle('active');
+        });
+    </script>
+</body>
+
+</html>
