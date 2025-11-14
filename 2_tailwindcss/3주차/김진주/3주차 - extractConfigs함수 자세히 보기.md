@@ -96,25 +96,23 @@ function extractConfigs(ctx, { config, base, path, reference, src }) {
 처리 순서
 1. Plugin 정규화
 
-2. Preset 검증
-
-3. Preset 재귀 호출
+2. Preset 재귀 호출
   - `config.presets` 순회하며 각 preset 을 동일한 방식으로 `extractConfigs` 재귀 처리.
   - 이 시점에서 "preset 들의 config" 가 `ctx.configs` 에 먼저 push 됨 → 후속(현재) config 가 덮어쓰기를 가질 수 있는 순서 확보.
 
-4. Plugin 재귀 처리
+3. Plugin 재귀 처리
   - 앞서 정규화한 `plugins` 를 순회:  
     a. `ctx.plugins.push(plugin)` 로 목록 축적.  
     b. `plugin.config` 존재 시 재귀 호출(플러그인이 제공하는 추가 설정).  
     이로 인해 "플러그인 내장 config" 또한 현재 사용자 config 보다 먼저 `ctx.configs` 에 들어감.
 
-5. Content 병합
+4. Content 병합
   - 각 항목을 `ctx.content.files` 에 push.  
     문자열 → `{ base, pattern: string }` 로 정규화.  
     객체 → 그대로(사용자가 이미 상세 지정 가능).
   - Content 는 override 개념 없이 누적만 됨.
 
-6. 현재 사용자 config 등록
+5. 현재 사용자 config 등록
   - 마지막에 `ctx.configs.push(config)` 실행.
   - 따라서 "현재 config" 가 presets, plugin.config 들보다 뒤에 위치 → 덮어쓰기 우선권 가짐.
   - 여러 파일(`files` 매개)에서 호출된다면 파일 처리 순서대로 `ctx.configs` 뒤에 이어 붙음. 최후에 등장한 파일이 동일 키를 덮어씀.
