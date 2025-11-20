@@ -1,0 +1,23 @@
+:is(h1, h2, h3, h4) {
+    color: red;
+}
+
+:where(h1, h2, h3, h4) {
+    color: blue;
+}
+
+h1 {
+    color: green;
+}
+
+._h1 {
+    color: orange;
+}
+
+#__h1 {
+    color: slateblue;
+}
+
+.container:has(h1) {
+    background-color: #09f;
+}

@@ -1,0 +1,58 @@
+.card {
+    padding: 1rem;
+    background-color: red;
+    container-type: inline-size;
+
+    p {
+        color: white;
+        background-color: #09f;
+    }
+
+    .btn {
+        border: none;
+        outline: none;
+        width: 5rem;
+
+        &.active {
+            border: 1px solid #09f;
+            width: 8rem;
+        }
+
+        &:hover {
+            background-color: blue;
+            color: #FEFEFE;
+            transition: all 0.3s ease-in-out;
+        }
+
+        &::after {
+            content: ' >>';
+            font-weight: bold;
+        }
+
+        &+& {
+            border: 30px solid black;
+        }
+    }
+
+    @Container (max-width: 550px) {
+        background-color: orange;
+
+        p {
+            background-color: purple;
+            padding: 2rem;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 3rem;
+
+            &:hover {
+                background-color: darkblue;
+            }
+        }
+    }
+
+    @media (max-width: 660px) {
+        background-color: green;
+    }
+}
