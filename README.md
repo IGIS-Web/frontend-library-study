@@ -1,4 +1,4 @@
-# Frontend Library Study Wiki
+# Frontend Library Study
 
 > 프론트엔드 라이브러리를 깊이 있게 탐구하는 스터디 기록
 
