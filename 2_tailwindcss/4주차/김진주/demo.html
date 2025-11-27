@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tailwind Transitions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="space-y-8 p-8">
+    <!-- 1. Hover / Focus / Active -->
+    <section>
+      <h2 class="mb-8 text-2xl font-bold">상태 전환</h2>
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <!-- Hover -->
+        <div class="border-2 border-dashed border-blue-200 p-6 hover:border-blue-400">
+          <h3 class="mb-4 font-semibold text-blue-800">Hover</h3>
+          <button class="w-full rounded-xl bg-blue-500 px-6 py-3 font-bold text-white hover:scale-105 hover:bg-blue-600 hover:shadow-xl">hover:scale-105</button>
+        </div>
+
+        <!-- Focus -->
+        <div class="border-2 border-dashed border-emerald-200 p-6 focus-within:border-emerald-400">
+          <h3 class="mb-4 font-semibold text-emerald-800">Focus (Tab키)</h3>
+          <input type="text" placeholder="Tab키로 포커스" class="w-full rounded-xl bg-emerald-500 px-6 py-3 font-bold text-white shadow-lg focus:scale-105 focus:ring-4 focus:ring-emerald-300 focus:outline-none" />
+        </div>
+
+        <!-- Active -->
+        <div class="border-2 border-dashed border-orange-200 p-6">
+          <h3 class="mb-4 font-semibold text-orange-800">Active</h3>
+          <button class="w-full rounded-xl bg-orange-500 px-6 py-3 font-bold text-white shadow-lg active:scale-95 active:bg-orange-600 active:shadow-sm">active:scale-95</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Transition 타입별 -->
+    <section>
+      <h2 class="mb-8 text-2xl font-bold">Transition 타입</h2>
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <!-- Colors -->
+        <div class="border-2 border-cyan-200 p-6 hover:border-cyan-400">
+          <h3 class="mb-4 font-bold text-cyan-800">Colors</h3>
+          <button class="w-full rounded-xl bg-cyan-500 px-6 py-3 font-bold text-white shadow-lg transition-colors duration-500 ease-in-out hover:bg-cyan-700">transition-colors</button>
+        </div>
+
+        <!-- Opacity -->
+        <div class="relative border-2 border-lime-200 p-6 hover:border-lime-400">
+          <h3 class="mb-4 font-bold text-lime-800">Opacity</h3>
+          <button class="w-full rounded-xl bg-gray-800 px-6 py-3 font-bold text-white opacity-50 shadow-lg transition-opacity duration-700 hover:opacity-100">opacity 0.5 → 1.0 페이드</button>
+        </div>
+
+        <!-- Shadow -->
+        <div class="border-2 border-amber-200 p-6 hover:border-amber-400">
+          <h3 class="mb-4 font-bold text-amber-800">Shadow</h3>
+          <button class="w-full rounded-xl bg-amber-500 px-6 py-3 font-bold text-white shadow-lg transition-shadow duration-500 ease-out hover:bg-amber-600 hover:shadow-2xl hover:shadow-amber-500/50">transition-shadow</button>
+        </div>
+
+        <!-- Transform -->
+        <div class="border-2 border-rose-200 p-6 hover:border-rose-400">
+          <h3 class="mb-4 font-bold text-rose-800">Transform</h3>
+          <button class="w-full rounded-xl bg-rose-500 px-6 py-3 font-bold text-white shadow-lg transition-transform duration-700 ease-in-out hover:scale-110 hover:rotate-12 hover:bg-rose-600">transition-transform</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Animate -->
+    <section>
+      <h2 class="mb-8 text-2xl font-bold">Animate</h2>
+      <div class="grid grid-cols-2 gap-6 lg:grid-cols-3 xl:grid-cols-5">
+        <div class="flex flex-col items-center border-2 border-blue-200 p-6">
+          <div class="h-16 w-16 animate-spin rounded-full border-4 border-blue-200 border-t-blue-500"></div>
+          <span class="mt-2 text-center font-semibold text-blue-800">animate-spin</span>
+        </div>
+
+        <div class="flex flex-col items-center border-2 border-red-200 p-6">
+          <span class="animate-pulse rounded-full bg-red-500 px-6 py-3 text-sm font-bold text-white">animate-pulse</span>
+          <span class="mt-2 text-center font-semibold text-red-800">깜빡임</span>
+        </div>
+
+        <div class="relative flex flex-col items-center border-2 border-green-200 p-6">
+          <div class="relative h-12 w-12">
+            <div class="absolute inset-0 h-12 w-12 animate-ping rounded-full bg-green-500"></div>
+            <div class="relative h-12 w-12 rounded-full bg-green-500 shadow-lg"></div>
+          </div>
+          <span class="mt-2 text-center font-semibold text-green-800">animate-ping</span>
+        </div>
+
+        <div class="flex flex-col items-center border-2 border-yellow-200 p-6">
+          <div class="flex h-16 w-16 animate-bounce items-center justify-center rounded-full bg-yellow-500">
+            <span class="">⬆️⬇️</span>
+          </div>
+          <span class="mt-2 text-center font-semibold text-yellow-800">animate-bounce</span>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
