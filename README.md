@@ -17,7 +17,7 @@
 
 ## 📖 분기별 학습 내용
 
-### [1분기: ssgoi](./1_ssgoi/README.md)
+### [1분기: ssgoi](https://github.com/IGIS-Web/frontend-library-study/wiki/SSGOI)
 
 > 페이지 전환 애니메이션을 구현하는 React 라이브러리
 
@@ -28,11 +28,11 @@
 -   애니메이션 성능 최적화
 -   다른 애니메이션 라이브러리와의 비교
 
-[상세 내용 보기 →](./1_ssgoi/README.md)
+[상세 내용 보기 →](https://github.com/IGIS-Web/frontend-library-study/wiki/SSGOI)
 
 ---
 
-### [2분기: tailwindcss](./2_tailwindcss/README.md)
+### [2분기: tailwindcss](https://github.com/IGIS-Web/frontend-library-study/wiki/Tailwind-CSS)
 
 > 유틸리티 우선 CSS 프레임워크
 
@@ -43,7 +43,7 @@
 -   최신 CSS 기능 활용
 -   접근성을 고려한 디자인
 
-[상세 내용 보기 →](./2_tailwindcss/README.md)
+[상세 내용 보기 →](https://github.com/IGIS-Web/frontend-library-study/wiki/Tailwind-CSS)
 
 ---
 
